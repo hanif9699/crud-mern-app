@@ -7,9 +7,10 @@ const cors = require('cors')
 const DataDAO = require('./dao/dataDAO')
 const fileUpload = require('express-fileupload')
 const path = require('path')
-
+// const busboyBodyParser = require('busboy-body-parser');
 app.use('/upload', express.static(path.join(__dirname, 'upload')))
 app.use(express.json())
+// app.use(busboyBodyParser({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: false }))
 setupDB()
 app.use(cors())
@@ -82,6 +83,6 @@ app.delete('/api/v1/data/:id', async (req, res, next) => {
         if (err) {
             res.send(err)
         }
-        res.send({ err: false, data: result })
+        res.send({ err: false, data: {id} })
     })
 });
